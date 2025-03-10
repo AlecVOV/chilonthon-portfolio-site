@@ -3,15 +3,15 @@
     class="fixed top-0 left-0 h-screen bg-gradient-onyx p-4 sm:p-6 transform transition-transform duration-300 overflow-hidden"
     :class="{ 
       '-translate-x-full': !isOpen,
-      'w-[85vw] max-w-[320px]': true,
-      'sm:w-72 md:w-80': true
+      'w-[85vw] max-w-[325px]': true,
+      'sm:w-72 md:w-96': true
     }"
   >
     <div class="flex flex-col items-center">
       <!-- Avatar and Basic Info -->
       <div class="relative w-24 h-24 sm:w-32 sm:h-32 mb-3 sm:mb-4 rounded-full overflow-hidden ring-4 ring-orange-yellow/20">
         <img 
-          src="https://avatars.githubusercontent.com/u/1?v=4"
+          src="/public/my_image2.jpg"
           alt="Alec Le"
           class="w-full h-full object-cover"
         />
@@ -39,17 +39,22 @@
         <div class="space-y-3 sm:space-y-4">
           <div class="flex items-center gap-2 sm:gap-3 text-gray-300 hover:text-white transition-colors">
             <IconMail class="w-4 h-4 sm:w-5 sm:h-5 text-orange-yellow" />
-            <a href="mailto:alec.le@example.com" class="truncate">alec.le@example.com</a>
+            <a href="mailto:lhtthong.forwork@outlook.com" class="truncate">lhtthong.forwork@outlook.com</a>
+          </div>
+
+          <div class="flex items-center gap-2 sm:gap-3 text-gray-300 hover:text-white transition-colors">
+            <IconMail class="w-4 h-4 sm:w-5 sm:h-5 text-orange-yellow" />
+            <a href="mailto:lhtthong.forwork@gmail.com" class="truncate">lhtthong.forwork@gmail.com</a>
           </div>
           
           <div class="flex items-center gap-2 sm:gap-3 text-gray-300 hover:text-white transition-colors">
             <IconPhone class="w-4 h-4 sm:w-5 sm:h-5 text-orange-yellow" />
-            <a href="tel:+84123456789">+84 123 456 789</a>
+            <a href="tel:+84947685335">+84 947 685 335</a>
           </div>
 
           <div class="flex items-center gap-2 sm:gap-3 text-gray-300">
             <IconCalendar class="w-4 h-4 sm:w-5 sm:h-5 text-orange-yellow" />
-            <span>September 15, 1995</span>
+            <span>October 02, 2004</span>
           </div>
 
           <div class="flex items-center gap-2 sm:gap-3 text-gray-300">
@@ -61,7 +66,7 @@
         <!-- Social Links -->
         <div class="flex justify-center gap-3 sm:gap-4">
           <a 
-            href="#" 
+            href="https://www.facebook.com/chilonthon" 
             class="text-gray-400 hover:text-orange-yellow transform hover:scale-110 transition-all"
             title="Facebook"
           >
@@ -69,7 +74,7 @@
           </a>
           
           <a 
-            href="#" 
+            href="https://www.linkedin.com/in/hoang-triet-thong-le-5b26b6185/" 
             class="text-gray-400 hover:text-orange-yellow transform hover:scale-110 transition-all"
             title="LinkedIn"
           >
@@ -77,7 +82,7 @@
           </a>
           
           <a 
-            href="#" 
+            href="https://www.instagram.com/the_chilonthon/" 
             class="text-gray-400 hover:text-orange-yellow transform hover:scale-110 transition-all"
             title="Instagram"
           >
@@ -85,7 +90,7 @@
           </a>
           
           <a 
-            href="#" 
+            href="https://medium.com/@lhtthong.forwork" 
             class="text-gray-400 hover:text-orange-yellow transform hover:scale-110 transition-all"
             title="Medium"
           >

@@ -48,10 +48,12 @@
         <section v-if="currentSection === 'About'" key="about" class="space-y-8">
           <h2 class="text-3xl font-semibold">About Me</h2>
           <p class="text-gray-300 leading-relaxed">
-            I'm a passionate Machine Learning Engineer with expertise in developing and deploying AI solutions.
-            My focus is on creating efficient and scalable machine learning models that solve real-world problems.
+            I’m an undergraduate pursuing a degree in Computer Science – AI, complemented by specialized coursework in Data Science and Artificial Intelligence. My academic journey gives me a theoretical grounding in cloud computing, machine learning, and software development, while my hands-on projects have challenged me to apply that knowledge in real-world scenarios.
           </p>
-          
+          <p class="text-gray-300 leading-relaxed">
+            Here you can explore my world, from an none fancy IT Developer to a person that have great passion in seeking knowledge by exploring new technologies and world insight about AI and related domain when applying up-to-date technologies into it.
+          </p>
+
           <div>
             <h3 class="text-2xl font-semibold mb-4">Fields of Interest</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -285,7 +287,7 @@
             <!-- Map -->
             <div class="h-96 bg-jet rounded-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.507640!3d37.757815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA!5e0!3m2!1sen!2sus!4v1123456789"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62708.14387673113!2d106.58612376222044!3d10.79146507555257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752bf733e69175%3A0xd8d63453733325fe!2sT%C3%A2n%20Ph%C3%BA%2C%20Ho%20Chi%20Minh%20City%2C%20Vietnam!5e0!3m2!1sen!2s!4v1741602034108!5m2!1sen!2s"
                 width="100%"
                 height="100%"
                 style="border:0;"
@@ -318,59 +320,43 @@ const sections = ['About', 'Resume', 'Portfolio', 'Blog', 'Contact']
 const fields = [
   {
     title: 'Machine Learning',
-    description: 'Developing and implementing machine learning models for various applications.'
+    description: 'Currently exploring various ML algorithms and their applications, eager to apply this knowledge in a real-world industry.'
   },
   {
     title: 'Cloud Computing',
-    description: 'Expertise in cloud platforms and distributed computing systems.'
+    description: 'Learning about cloud platforms like AWS, excited to work with cloud technologies in a professional setting to deploy the best practise model pipline.'
   },
   {
     title: 'Deep Learning',
-    description: 'Neural networks and deep learning model architecture design.'
+    description: 'Diving into neural networks and deep learning architectures, keen to contribute to innovative projects as an intern.'
   },
   {
     title: 'Data Engineering',
-    description: 'Building robust data pipelines and processing systems.'
+    description: 'Understanding data pipelines and processing systems, looking forward to gaining hands-on experience in data engineering during an internship.'
   }
 ]
 
 const education = [
   {
-    degree: 'Master of Science in Computer Science',
-    school: 'Stanford University',
-    year: '2020-2022',
-    description: 'Specialized in Machine Learning and Artificial Intelligence. Conducted research on deep learning models for computer vision.'
-  },
-  {
-    degree: 'Bachelor of Engineering in Computer Science',
-    school: 'UC Berkeley',
-    year: '2016-2020',
-    description: 'Graduated with honors. Focus on algorithms and data structures. Led the AI/ML student club.'
+    degree: 'Bachelor of Computer Science, Majoring in Artificial Intelligence',
+    school: 'Swinburne University of Technology',
+    year: '2022-2026',
+    description: 'Mastered AI fundamentals at Swinburne Vietnam, delivering impactful solutions in collaboration with industry partners.'
   }
 ]
 
 const experience = [
   {
-    title: 'Senior Machine Learning Engineer',
-    company: 'Tech Giant Corp',
-    period: '2022-Present',
-    description: 'Leading a team of ML engineers in developing and deploying large-scale AI models. Improved model efficiency by 40%.'
-  },
-  {
-    title: 'Machine Learning Engineer',
-    company: 'AI Startup Inc',
-    period: '2020-2022',
-    description: 'Developed computer vision models for autonomous systems. Implemented MLOps practices reducing deployment time by 60%.'
+    title: 'Member of AIO 2024',
+    company: 'AI Vietnam',
+    period: '2024-2025',
+    description: 'Intensive 1-year program with diverse projects in image processing, natural language processing, and data science, showcasing practical skills from python, algorithms, machine learning, and real-world project applications.'
   }
 ]
 
 const skills = [
   { name: 'Python', level: 95 },
-  { name: 'TensorFlow/PyTorch', level: 90 },
-  { name: 'Machine Learning', level: 85 },
-  { name: 'Deep Learning', level: 80 },
   { name: 'Cloud Platforms', level: 85 },
-  { name: 'MLOps', level: 75 }
 ]
 
 const certifications = [
