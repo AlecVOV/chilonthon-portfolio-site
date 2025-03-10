@@ -1,0 +1,502 @@
+<template>
+  <div class="min-h-screen bg-eerie-black font-poppins text-white">
+    <!-- Sidebar Component -->
+    <Sidebar 
+      :is-open="isSidebarOpen"
+      :current-section="currentSection"
+      class="fixed top-0 left-0 h-full z-20 transition-all duration-300"
+      :class="{
+        'translate-x-0 w-64 sm:w-72 md:w-80': isSidebarOpen, 
+        '-translate-x-full': !isSidebarOpen, 
+        'md:translate-x-0': true
+      }"
+    />
+
+    <!-- Main Content -->
+    <main class="transition-all duration-300 p-6 md:p-8" :class="[isSidebarOpen ? 'md:ml-80' : 'ml-0']">
+    <!-- Navigation -->
+    <nav class="mb-8">
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex gap-4 flex-wrap">
+        <li v-for="section in sections" :key="section">
+          <button 
+            @click="currentSection = section"
+            class="px-4 py-2 rounded-lg transition-colors"
+            :class="currentSection === section ? 'bg-orange-yellow text-white' : 'text-gray-400 hover:text-white'"
+          >
+            {{ section }}
+          </button>
+        </li>
+      </ul>
+      
+      <!-- Mobile Navigation -->
+      <div class="md:hidden">
+        <select 
+          v-model="currentSection" 
+          class="w-full p-2 bg-jet text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-yellow text-base"
+        >
+            <option v-for="section in sections" :key="section" :value="section" class="text-sm">
+            {{ section }}
+            </option>
+        </select>
+      </div>
+    </nav>
+
+      <!-- Content Sections -->
+      <TransitionGroup name="fade" mode="out-in">
+        <!-- About Section -->
+        <section v-if="currentSection === 'About'" key="about" class="space-y-8">
+          <h2 class="text-3xl font-semibold">About Me</h2>
+          <p class="text-gray-300 leading-relaxed">
+            I'm a passionate Machine Learning Engineer with expertise in developing and deploying AI solutions.
+            My focus is on creating efficient and scalable machine learning models that solve real-world problems.
+          </p>
+          
+          <div>
+            <h3 class="text-2xl font-semibold mb-4">Fields of Interest</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div v-for="field in fields" :key="field.title" 
+                class="p-6 bg-gradient-jet rounded-lg">
+                <h4 class="text-xl font-medium text-orange-yellow">{{ field.title }}</h4>
+                <p class="mt-2 text-gray-300">{{ field.description }}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section v-if="currentSection === 'Resume'" key="resume" class="space-y-8">
+          <h2 class="text-3xl font-semibold">Resume</h2>
+          
+          <!-- Education -->
+          <div class="space-y-6">
+            <h3 class="text-2xl font-semibold">Education</h3>
+            <div class="space-y-4">
+              <div v-for="edu in education" :key="edu.degree" class="p-6 bg-gradient-jet rounded-lg">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="text-xl font-medium text-orange-yellow">{{ edu.degree }}</h4>
+                    <p class="text-gray-300">{{ edu.school }}</p>
+                  </div>
+                  <span class="text-sm text-gray-400">{{ edu.year }}</span>
+                </div>
+                <p class="mt-2 text-gray-300">{{ edu.description }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience -->
+          <div class="space-y-6">
+            <h3 class="text-2xl font-semibold">Experience</h3>
+            <div class="space-y-4">
+              <div v-for="exp in experience" :key="exp.title" class="p-6 bg-gradient-jet rounded-lg">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="text-xl font-medium text-orange-yellow">{{ exp.title }}</h4>
+                    <p class="text-gray-300">{{ exp.company }}</p>
+                  </div>
+                  <span class="text-sm text-gray-400">{{ exp.period }}</span>
+                </div>
+                <p class="mt-2 text-gray-300">{{ exp.description }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="space-y-6">
+            <h3 class="text-2xl font-semibold">Skills</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div v-for="skill in skills" :key="skill.name" class="p-4 bg-gradient-jet rounded-lg">
+                <div class="flex justify-between mb-2">
+                  <span class="text-white">{{ skill.name }}</span>
+                  <span class="text-orange-yellow">{{ skill.level }}%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full">
+                  <div 
+                    class="h-full bg-orange-yellow rounded-full transition-all duration-500"
+                    :style="{ width: `${skill.level}%` }"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Certfication -->
+        <section v-if="currentSection === 'Resume'" id="certifications" class="space-y-6">
+          <h3 class="text-2xl font-semibold pt-6">Certifications</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div v-for="cert in certifications" :key="cert.id" class="p-6 bg-gradient-jet rounded-lg">
+              <h3 class="text-xl font-medium text-orange-yellow">{{ cert.name }}</h3>
+              <p class="text-gray-300">{{ cert.issuer }}</p>
+              <p class="text-gray-400">{{ cert.date }}</p>
+              <a 
+                :href="cert.link" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-block mt-4 px-4 py-2 bg-orange-yellow text-white rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                View Certificate
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section v-if="currentSection === 'Portfolio'" key="portfolio" class="space-y-8">
+          <h2 class="text-3xl font-semibold">Portfolio</h2>
+          
+          <!-- Filter -->
+          <div class="flex gap-4 flex-wrap">
+            <button
+              v-for="category in ['All', ...projectCategories]"
+              :key="category"
+              @click="selectedCategory = category"
+              class="px-4 py-2 rounded-lg transition-colors"
+              :class="selectedCategory === category ? 'bg-orange-yellow text-white' : 'bg-jet text-gray-400 hover:text-white'"
+            >
+              {{ category }}
+            </button>
+          </div>
+
+          <!-- Projects Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+              v-for="project in filteredProjects"
+              :key="project.title"
+              class="group relative overflow-hidden rounded-lg"
+            >
+              <img 
+                :src="project.image" 
+                :alt="project.title"
+                class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
+                v-bind="$attrs"
+                @error="handleImageError"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <h4 class="text-xl font-medium text-white">{{ project.title }}</h4>
+                <p class="text-gray-300 mt-2">{{ project.description }}</p>
+                <div class="flex gap-4 mt-4">
+                  <a 
+                    :href="project.demo" 
+                    class="px-4 py-2 bg-orange-yellow text-white rounded-lg hover:bg-orange-600 transition-colors"
+                  >
+                    Demo
+                  </a>
+                  <a 
+                    :href="project.github" 
+                    class="px-4 py-2 bg-jet text-white rounded-lg hover:bg-gray-700 transition-colors"
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section v-if="currentSection === 'Blog'" key="blog" class="space-y-8">
+          <h2 class="text-3xl font-semibold">Blog</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <article 
+              v-for="post in blogPosts" 
+              :key="post.title"
+              class="bg-gradient-jet rounded-lg overflow-hidden group"
+            >
+              <img 
+                :src="post.image" 
+                :alt="post.title"
+                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
+                v-bind="$attrs"
+                @error="handleImageError"
+              />
+              <div class="p-6">
+                <div class="flex gap-4 text-sm text-gray-400 mb-2">
+                  <span>{{ post.date }}</span>
+                  <span>{{ post.category }}</span>
+                </div>
+                <h3 class="text-xl font-medium text-white group-hover:text-orange-yellow transition-colors">
+                  {{ post.title }}
+                </h3>
+                <p class="mt-2 text-gray-300">{{ post.excerpt }}</p>
+                <a 
+                  href="#" 
+                  class="inline-block mt-4 text-orange-yellow hover:text-white transition-colors"
+                >
+                  Read More →
+                </a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section v-if="currentSection === 'Contact'" key="contact" class="space-y-8">
+          <h2 class="text-3xl font-semibold">Contact</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Contact Form -->
+            <form @submit.prevent="handleSubmit" class="space-y-4">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                <input
+                  id="name"
+                  v-model="contactForm.name"
+                  type="text"
+                  required
+                  class="w-full px-4 py-2 bg-jet rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-yellow"
+                />
+              </div>
+              
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <input
+                  id="email"
+                  v-model="contactForm.email"
+                  type="email"
+                  required
+                  class="w-full px-4 py-2 bg-jet rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-yellow"
+                />
+              </div>
+              
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                <textarea
+                  id="message"
+                  v-model="contactForm.message"
+                  required
+                  rows="4"
+                  class="w-full px-4 py-2 bg-jet rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-yellow"
+                ></textarea>
+              </div>
+              
+              <button
+                type="submit"
+                class="w-full px-6 py-3 bg-orange-yellow text-white rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Send Message
+              </button>
+            </form>
+
+            <!-- Map -->
+            <div class="h-96 bg-jet rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.507640!3d37.757815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA!5e0!3m2!1sen!2sus!4v1123456789"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </section>
+      </TransitionGroup>
+    </main>
+
+    <!-- Mobile Menu Button -->
+    <button 
+      @click="isSidebarOpen = !isSidebarOpen"
+      class="fixed bottom-4 right-4 md:hidden bg-orange-yellow p-2 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+    >
+      <IconMenu class="w-6 h-6" />
+    </button>
+  </div>
+</template>
+
+<script setup>
+const isSidebarOpen = ref(window ? window.innerWidth > 768 : true)
+const currentSection = ref('About')
+const selectedCategory = ref('All')
+
+const sections = ['About', 'Resume', 'Portfolio', 'Blog', 'Contact']
+
+const fields = [
+  {
+    title: 'Machine Learning',
+    description: 'Developing and implementing machine learning models for various applications.'
+  },
+  {
+    title: 'Cloud Computing',
+    description: 'Expertise in cloud platforms and distributed computing systems.'
+  },
+  {
+    title: 'Deep Learning',
+    description: 'Neural networks and deep learning model architecture design.'
+  },
+  {
+    title: 'Data Engineering',
+    description: 'Building robust data pipelines and processing systems.'
+  }
+]
+
+const education = [
+  {
+    degree: 'Master of Science in Computer Science',
+    school: 'Stanford University',
+    year: '2020-2022',
+    description: 'Specialized in Machine Learning and Artificial Intelligence. Conducted research on deep learning models for computer vision.'
+  },
+  {
+    degree: 'Bachelor of Engineering in Computer Science',
+    school: 'UC Berkeley',
+    year: '2016-2020',
+    description: 'Graduated with honors. Focus on algorithms and data structures. Led the AI/ML student club.'
+  }
+]
+
+const experience = [
+  {
+    title: 'Senior Machine Learning Engineer',
+    company: 'Tech Giant Corp',
+    period: '2022-Present',
+    description: 'Leading a team of ML engineers in developing and deploying large-scale AI models. Improved model efficiency by 40%.'
+  },
+  {
+    title: 'Machine Learning Engineer',
+    company: 'AI Startup Inc',
+    period: '2020-2022',
+    description: 'Developed computer vision models for autonomous systems. Implemented MLOps practices reducing deployment time by 60%.'
+  }
+]
+
+const skills = [
+  { name: 'Python', level: 95 },
+  { name: 'TensorFlow/PyTorch', level: 90 },
+  { name: 'Machine Learning', level: 85 },
+  { name: 'Deep Learning', level: 80 },
+  { name: 'Cloud Platforms', level: 85 },
+  { name: 'MLOps', level: 75 }
+]
+
+const certifications = [
+  {
+    id: 1,
+    name: 'CCNA: Introduction to Networks',
+    issuer: 'Cisco',
+    date: 'April 2024',
+    link: 'https://www.credly.com/badges/ea475619-7376-44f1-9bba-162b836b9c48'
+  },
+  {
+    id: 2,
+    name: 'Programming for Everybody (Getting Started with Python)',
+    issuer: 'University of Michigan',
+    date: 'October 2024',
+    link: 'https://coursera.org/share/5ee62f4961be5e83b3d118d4ef28e6a6'
+  },
+  {
+    id: 3,
+    name: 'AWS Academy Graduate - AWS Academy Cloud Foundations',
+    issuer: 'Amazon Web Services',
+    date: 'October 2024',
+    link: 'https://www.credly.com/badges/988c98b4-6507-4e49-b2d2-6093db2310fa'
+  },
+  {
+    id: 4,
+    name: 'Getting Started with Data Analytics on AWS',
+    issuer: 'Amazon Web Services',
+    date: 'December 2024',
+    link: 'https://coursera.org/share/d50e9b9c27fafd6c418db51ff6c888f9'
+  }
+]
+
+const projects = [
+  {
+    title: 'AI Image Recognition',
+    description: 'Deep learning model for real-time object detection',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Machine Learning',
+    demo: '#',
+    github: '#'
+  },
+  {
+    title: 'Cloud ML Pipeline',
+    description: 'Automated ML training and deployment pipeline',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Cloud',
+    demo: '#',
+    github: '#'
+  },
+  {
+    title: 'NLP Chatbot',
+    description: 'Advanced chatbot using transformer models',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Deep Learning',
+    demo: '#',
+    github: '#'
+  }
+]
+
+const projectCategories = [...new Set(projects.map(p => p.category))]
+
+const filteredProjects = computed(() => {
+  if (selectedCategory.value === 'All') return projects
+  return projects.filter(p => p.category === selectedCategory.value)
+})
+
+const blogPosts = [
+  {
+    title: 'The Future of Machine Learning',
+    excerpt: 'Exploring upcoming trends in ML and their impact on industry.',
+    image: 'https://via.placeholder.com/400x300',
+    date: 'March 15, 2024',
+    category: 'Machine Learning'
+  },
+  {
+    title: 'Building Scalable ML Systems',
+    excerpt: 'Best practices for developing production-ready ML systems.',
+    image: 'https://via.placeholder.com/400x300',
+    date: 'March 1, 2024',
+    category: 'MLOps'
+  },
+  {
+    title: 'Deep Learning Breakthroughs',
+    excerpt: 'Recent advances in deep learning architectures and applications.',
+    image: 'https://via.placeholder.com/400x300',
+    date: 'February 15, 2024',
+    category: 'Deep Learning'
+  }
+]
+
+const contactForm = reactive({
+  name: '',
+  email: '',
+  message: ''
+})
+
+const handleSubmit = () => {
+  // Handle form submission
+  console.log('Form submitted:', contactForm)
+  // Reset form
+  contactForm.name = ''
+  contactForm.email = ''
+  contactForm.message = ''
+}
+
+// Add window resize listener to adjust sidebar state
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768) {
+      isSidebarOpen.value = false
+    } else {
+      isSidebarOpen.value = true
+    }
+  })
+})
+</script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
