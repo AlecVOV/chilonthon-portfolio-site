@@ -395,7 +395,7 @@ const projects = [
     title: 'AI Image Recognition',
     description: 'Deep learning model for real-time object detection',
     image: 'https://via.placeholder.com/400x300',
-    category: 'Machine Learning',
+    category: 'Research & Publications',
     demo: '#',
     github: '#'
   },
@@ -403,7 +403,7 @@ const projects = [
     title: 'Cloud ML Pipeline',
     description: 'Automated ML training and deployment pipeline',
     image: 'https://via.placeholder.com/400x300',
-    category: 'Cloud',
+    category: 'Cloud Computing',
     demo: '#',
     github: '#'
   },
@@ -412,6 +412,46 @@ const projects = [
     description: 'Advanced chatbot using transformer models',
     image: 'https://via.placeholder.com/400x300',
     category: 'Deep Learning',
+    demo: '#',
+    github: '#'
+  },
+  {
+    title: 'Data Visualization Dashboard',
+    description: 'Interactive dashboard for data analytics',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Data Engineering',
+    demo: '#',
+    github: '#'
+  },
+  {
+    title: 'AI Image Recognition',
+    description: 'Deep learning model for real-time object detection',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Talks & Workshops',
+    demo: '#',
+    github: '#'
+  },
+  {
+    title: 'AI Image Recognition',
+    description: 'Deep learning model for real-time object detection',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Machine Learning Operations',
+    demo: '#',
+    github: '#'
+  },
+  {
+    title: 'Cloud ML Pipeline',
+    description: 'Automated ML training and deployment pipeline',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Machine Learning',
+    demo: '#',
+    github: '#'
+  },
+  {
+    title: 'Data Visualization Dashboard',
+    description: 'Interactive dashboard for data analytics',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Data Analytics',
     demo: '#',
     github: '#'
   }
@@ -445,6 +485,13 @@ const blogPosts = [
     image: 'https://via.placeholder.com/400x300',
     date: 'February 15, 2024',
     category: 'Deep Learning'
+  },
+  {
+    title: 'Cloud Computing for AI',
+    excerpt: 'Leveraging cloud platforms for scalable AI solutions.',
+    image: 'https://via.placeholder.com/400x300',
+    date: 'February 1, 2024',
+    category: 'Cloud'
   }
 ]
 
@@ -454,14 +501,59 @@ const contactForm = reactive({
   message: ''
 })
 
-const handleSubmit = () => {
-  // Handle form submission
-  console.log('Form submitted:', contactForm)
-  // Reset form
-  contactForm.name = ''
-  contactForm.email = ''
-  contactForm.message = ''
+const sendSubmission = async (accessKey, recipient) => {
+  // Prepare form data
+  const formData = new FormData()
+  formData.append('name', contactForm.name)
+  formData.append('email', contactForm.email)
+  formData.append('message', contactForm.message)
+  formData.append('access_key', accessKey) // Use provided access key for this submission
+  formData.append('recipient', recipient)  // Set the recipient for this submission
+
+  // Convert form data to JSON
+  const object = Object.fromEntries(formData.entries())
+  const json = JSON.stringify(object)
+
+  // Send the form data
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: json
+  })
+
+  return await response.json()
 }
+
+const handleSubmit = async (event) => {
+  event.preventDefault()
+
+  try {
+    // First submission with the first access key and recipient
+    const result1 = await sendSubmission(
+      'df577497-d8d8-47e3-9351-94d21a61e207', 
+      'lhtthong.forwork@outlook.com'
+    )
+    console.log("Form submitted successfully to first recipient:", result1)
+
+    // Second submission with the second access key and recipient
+    const result2 = await sendSubmission(
+      'b18db079-0457-4a29-91ac-ef55ae2200cb', 
+      'lhtthong.forwork@gmail.com'
+    )
+    console.log("Form submitted successfully to second recipient:", result2)
+  } catch (error) {
+    console.error("Error submitting form:", error)
+  }
+
+  // Reset form
+  contactForm.name = ""
+  contactForm.email = ""
+  contactForm.message = ""
+}
+
 
 // Add window resize listener to adjust sidebar state
 onMounted(() => {
