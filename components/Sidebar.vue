@@ -35,6 +35,18 @@
         class="w-full transition-all duration-500 ease-in-out space-y-4 sm:space-y-6 text-sm sm:text-base"
         :class="showContacts ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0'"
       >
+
+      <!-- Resume Download Button -->
+        <a 
+          href="https://drive.google.com/file/d/1eKxKzNLDHHyH8qrpEFI12q4ahitxUh4B/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 w-full px-4 py-2 bg-gradient-to-r from-orange-yellow to-orange-600 hover:from-orange-600 hover:to-orange-yellow text-dark font-bold rounded-lg transition-all duration-300"
+        >
+        <IconResume class="w-5 h-5" />
+          Download Resume
+        </a>
+
         <!-- Personal Info -->
         <div class="space-y-3 sm:space-y-4">
           <div class="flex items-center gap-2 sm:gap-3 text-gray-300 hover:text-white transition-colors">
