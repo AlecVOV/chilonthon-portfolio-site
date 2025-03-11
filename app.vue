@@ -279,9 +279,23 @@
               <button
                 type="submit"
                 class="w-full px-6 py-3 bg-orange-yellow text-white rounded-lg hover:bg-orange-600 transition-colors"
+                :disabled="isSubmitting"
               >
-                Send Message
+                <span v-if="isSubmitting">Sending...</span>
+                <span v-else>Send Message</span>
               </button>
+              
+              <!-- Form Notifications -->
+              <div v-if="submitStatus" class="mt-4">
+                <div v-if="submitStatus === 'success'" 
+                    class="p-4 bg-green-600/20 border border-green-600 rounded-lg text-green-400">
+                  <p>Message sent successfully! I will get back to you as soon as possible.</p>
+                </div>
+                <div v-if="submitStatus === 'error'" 
+                    class="p-4 bg-red-600/20 border border-red-600 rounded-lg text-red-400">
+                  <p>{{ errorMessage || 'There was an error sending your message. Please try again.' }}</p>
+                </div>
+              </div>
             </form>
 
             <!-- Map -->
@@ -501,6 +515,11 @@ const contactForm = reactive({
   message: ''
 })
 
+// Add form submission states
+const isSubmitting = ref(false)
+const submitStatus = ref(null)
+const errorMessage = ref('')
+
 const sendSubmission = async (accessKey, recipient) => {
   // Prepare form data
   const formData = new FormData()
@@ -529,6 +548,11 @@ const sendSubmission = async (accessKey, recipient) => {
 
 const handleSubmit = async (event) => {
   event.preventDefault()
+  
+  // Reset status and show submitting state
+  submitStatus.value = null
+  errorMessage.value = ''
+  isSubmitting.value = true
 
   try {
     // First submission with the first access key and recipient
@@ -544,16 +568,29 @@ const handleSubmit = async (event) => {
       'lhtthong.forwork@gmail.com'
     )
     console.log("Form submitted successfully to second recipient:", result2)
+    
+    // Show success message
+    submitStatus.value = 'success'
+    
+    // Reset form
+    contactForm.name = ""
+    contactForm.email = ""
+    contactForm.message = ""
+    
   } catch (error) {
     console.error("Error submitting form:", error)
+    // Show error message
+    submitStatus.value = 'error'
+    errorMessage.value = error.message || 'Failed to send message'
+  } finally {
+    isSubmitting.value = false
+    
+    // Auto-hide notification after 5 seconds
+    setTimeout(() => {
+      submitStatus.value = null
+    }, 5000)
   }
-
-  // Reset form
-  contactForm.name = ""
-  contactForm.email = ""
-  contactForm.message = ""
 }
-
 
 // Add window resize listener to adjust sidebar state
 onMounted(() => {

@@ -44,7 +44,7 @@
           class="flex items-center justify-center gap-2 w-full px-4 py-2 bg-gradient-to-r from-orange-yellow to-orange-600 hover:from-orange-600 hover:to-orange-yellow text-dark font-bold rounded-lg transition-all duration-300"
         >
         <IconResume class="w-5 h-5" />
-          Download Resume
+          My Resume
         </a>
 
         <!-- Personal Info -->
