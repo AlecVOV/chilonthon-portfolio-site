@@ -468,6 +468,14 @@ const projects = [
     category: 'Data Analytics',
     demo: '#',
     github: '#'
+  },
+  {
+    title: 'Data Visualization Dashboard',
+    description: 'Interactive dashboard for data analytics',
+    image: 'https://via.placeholder.com/400x300',
+    category: 'Data Science',
+    demo: '#',
+    github: '#'
   }
 ]
 
