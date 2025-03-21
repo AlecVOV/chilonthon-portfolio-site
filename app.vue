@@ -105,23 +105,22 @@
           </div>
 
           <!-- Skills -->
-          <div class="space-y-6">
+            <div class="space-y-6">
             <h3 class="text-2xl font-semibold">Skills</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div v-for="skill in skills" :key="skill.name" class="p-4 bg-gradient-jet rounded-lg">
-                <div class="flex justify-between mb-2">
-                  <span class="text-white">{{ skill.name }}</span>
-                  <span class="text-orange-yellow">{{ skill.level }}%</span>
-                </div>
-                <div class="h-2 bg-gray-700 rounded-full">
-                  <div 
-                    class="h-full bg-orange-yellow rounded-full transition-all duration-500"
-                    :style="{ width: `${skill.level}%` }"
-                  ></div>
-                </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <div v-for="skill in skills" :key="skill.name" class="p-4 bg-gradient-jet rounded-lg flex items-center">
+              <img 
+                :src="skill.icon" 
+                :alt="`${skill.name} icon`" 
+                class="w-10 h-10 mr-3"
+                @error="(e) => e.target.src = 'https://via.placeholder.com/40'"
+              />
+              <div class="flex-1">
+                <h4 class="text-lg font-medium text-white">{{ skill.name }}</h4>
+              </div>
               </div>
             </div>
-          </div>
+            </div>
         </section>
 
         <!-- Certfication -->
@@ -369,8 +368,30 @@ const experience = [
 ]
 
 const skills = [
-  { name: 'Python', level: 95 },
-  { name: 'Cloud Platforms', level: 85 },
+  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Python-Light.svg' },
+  { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/AWS-Light.svg' },
+  { name: 'Anaconda', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Anaconda-Light.svg' },
+  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Docker.svg' },
+  { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Flask-Light.svg' },
+  { name: 'Django', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Django.svg' },
+  { name: 'Github', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Github-Light.svg' },
+  { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Git.svg' },
+  { name: 'Jenkins', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Jenkins-Light.svg' },
+  { name: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Kubernetes.svg' },
+  { name: 'LaTeX', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/LaTeX-Light.svg' },
+  { name: 'Stack Overflow', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/StackOverflow-Light.svg' },
+  { name: 'LinkedIn', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/LinkedIn.svg' },
+  { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Linux-Light.svg' },
+  { name: 'Nuxt', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/NuxtJS-Light.svg' },
+  { name: 'Vite', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Vite-Light.svg' },
+  { name: 'Vue', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/VueJS-Light.svg' },
+  { name: 'Obsidian', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Obsidian-Light.svg' },
+  { name: 'TensorFlow', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/TensorFlow-Light.svg' },
+  { name: 'Terraform', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Terraform-Light.svg' },
+  { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/TypeScript.svg' },
+  { name: 'Ubuntu', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/Ubuntu-Light.svg' },
+  { name: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/VSCode-Light.svg' },
+  { name: 'TailwindCSS', icon: 'https://cdn.jsdelivr.net/gh/tandpfun/skill-icons/icons/TailwindCSS-Light.svg' }
 ]
 
 const certifications = [
